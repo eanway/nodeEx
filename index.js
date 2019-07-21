@@ -2,6 +2,7 @@ const express = require("express")
 const hbs = require("hbs")
 const app = express()
 const axios = require("./axios")
+const fetch = require('node-fetch');
 
 console.log(__dirname)
 
@@ -13,10 +14,32 @@ app.use("/images", express.static("images"));
 
 app.use(express.static(__dirname + "/public"));
 
-app.get('/', function (req, res) {
-  res.render("body.hbs")
-})
- 
+const url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a611315ba9b178c672528a504436308c"
+
+fetch(url)
+.then(
+    function(response) {
+        //console.log(response)
+        var json = response.json()
+        return json;
+    }
+)
+.then(
+    function(json){
+        //console.log(json);
+        var results = json.results
+        //document.getElementById('movieList').innerHTML = results
+        console.log(results)
+        console.log(results[0])
+        app.get('/', function (req, res, next) {
+          res.render("body.hbs", {
+            data: results
+          });
+        });
+        //return(results)
+    }
+)
+
 app.listen(3000)
 
 // TODO: 2 weeks from 6/29/2019

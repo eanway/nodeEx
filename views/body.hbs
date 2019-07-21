@@ -4,39 +4,13 @@
     <main>
         <h1>This is a header</h1>
         <section>
-            This is the body
-            <div id='movieList'>
-                {{#each this}}
-                    {{@index}}: {{title}}
-                {{/each}}
-            </div>
+            {{#each data}}
+              <img src='https://image.tmdb.org/t/p/w500/{{this.backdrop_path}}' alt='backdrop image for {{this.title}}'>
+              <p>{{this.title}}</p>
+              <p>{{this.release_date}}</p>
+              <p>{{this.overview}}</p>
+            {{/each}}
         </section>
     </main>
 
 {{> footer}}
-
-<script>
-    const url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a611315ba9b178c672528a504436308c"
-
-    fetch(url)
-    .then(
-        function(response) {
-            console.log(response)
-            var json = response.json()
-            return json;
-        }
-    )
-    .then(
-        function(json){
-            console.log(json);
-            var results = json.results
-            document.getElementById('movieList').innerHTML = results
-            return(results)
-        }
-    )
-    .then(
-        function(results){
-            console.log(results[0].title)
-        }
-    )
-</script>
