@@ -19,24 +19,18 @@ const url = "https://api.themoviedb.org/3/movie/now_playing?api_key=a611315ba9b1
 fetch(url)
 .then(
     function(response) {
-        //console.log(response)
         var json = response.json()
         return json;
     }
 )
 .then(
     function(json){
-        //console.log(json);
         var results = json.results
-        //document.getElementById('movieList').innerHTML = results
-        console.log(results)
-        console.log(results[0])
         app.get('/', function (req, res, next) {
           res.render("body.hbs", {
             data: results
           });
         });
-        //return(results)
     }
 )
 
