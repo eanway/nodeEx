@@ -1,7 +1,6 @@
 const express = require("express")
 const hbs = require("hbs")
 const app = express()
-const axios = require("./axios")
 const fetch = require('node-fetch');
 
 const port = process.env.PORT || 3000;
