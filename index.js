@@ -4,6 +4,8 @@ const app = express()
 const axios = require("./axios")
 const fetch = require('node-fetch');
 
+const port = process.env.PORT || 3000;
+
 console.log(__dirname)
 
 hbs.registerPartials(__dirname + "/views/partials");
@@ -34,7 +36,9 @@ fetch(url)
     }
 )
 
-app.listen(3000)
+app.listen(port, () => {
+  console.log(`Sever is up on port ${port}`);
+});
 
 // TODO: 2 weeks from 6/29/2019
 // https://github.com/thomason84/Portfolio---Node/blob/master/server.js
